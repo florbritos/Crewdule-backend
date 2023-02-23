@@ -22,6 +22,16 @@ function validationRules(key, eventInfo, errorMessage){
                 }
                 
             } else if(eventInfo.checkNextDay){
+                console.log({
+                    'msg1': new Date(eventInfo[key]).getFullYear() == new Date(eventInfo.end).getFullYear(),
+                    'msg2': new Date(eventInfo[key]).getMonth() == new Date(eventInfo.end).getMonth(),
+                    'msg3': new Date(eventInfo[key]).getDate() + 1 !== new Date(eventInfo.end).getDate(),
+                    'msg4': new Date(eventInfo[key]).getDate() + 1,
+                    'msg5': new Date(eventInfo.end).getDate(),
+                    'msg6': new Date(eventInfo[key]).getDate(),
+                    'msg7': new Date(eventInfo[key]),
+                    'msg8': new Date(eventInfo.end)
+                })
                 if(
                     new Date(eventInfo[key]).getFullYear() == new Date(eventInfo.end).getFullYear() &&
                     new Date(eventInfo[key]).getMonth() == new Date(eventInfo.end).getMonth() &&
