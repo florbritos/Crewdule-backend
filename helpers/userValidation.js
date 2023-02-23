@@ -53,8 +53,6 @@ function validationRules(field,value){
             break;
         
         case "otp":
-            console.log(value)
-            console.log(value)
             if(typeof(value) == "string"){
                 error = "OTP must be all numbers"
             } else if(value == null){

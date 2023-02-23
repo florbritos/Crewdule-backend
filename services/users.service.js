@@ -1,6 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb'
 import * as PasswordService from './password.service.js'
-//import bcrypt from 'bcrypt'
 
 //const client = new MongoClient('mongodb://127.0.0.1:27017')
 const client = new MongoClient('mongodb+srv://crewdule:35978540Fb@cluster0.ptdeusi.mongodb.net/test')
@@ -53,9 +52,7 @@ async function register(user) {
         throw new Error('Email is already registered')
     }
 
-    //const salt = await bcrypt.genSalt(10)
     const salt = await PasswordService.passwordSalting()
-    //newUser.password = await bcrypt.hash(newUser.password, salt)
     newUser.password = await PasswordService.passwordHash(newUser.password, salt)
 
     await usersCollection.insertOne(newUser)
@@ -87,12 +84,9 @@ async function update(id, newInfo){
     }
 
     if(fieldToUpdate.hasOwnProperty('password')){
-        console.log(fieldToUpdate)
 
         const salt = await PasswordService.passwordSalting()
         fieldToUpdate.password = await PasswordService.passwordHash(fieldToUpdate.password, salt)
-        //const salt = await bcrypt.genSalt(10)
-        //fieldToUpdate.password = await bcrypt.hash(fieldToUpdate.password, salt)
     }
 
     const result = await usersCollection.updateOne({

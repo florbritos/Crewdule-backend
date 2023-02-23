@@ -16,7 +16,6 @@ function createDoc(req, res){
 
     UserService.findById(idUser)
     .then(function(user){
-        console.log(user)
         const newDoc = {
             user_id: user._id,
             documentType: req.body.documentType,

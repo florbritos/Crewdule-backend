@@ -1,4 +1,4 @@
-export const typeOfEvent=[
+export const typeOfEvent = [
     {
         name: 'Flight',
         start:true,

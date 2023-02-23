@@ -9,7 +9,6 @@ function sendEmail(req, res){
     if(Object.entries(validation).length === 0){
         const email = req.body.email
         const otp = req.body.otp
-        console.log(email, otp)
 
         UsersService.findByEmail(email)
         .then(function(user){

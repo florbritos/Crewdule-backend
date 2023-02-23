@@ -1,7 +1,6 @@
 import * as UsersService from '../../services/users.service.js'
 import * as TokenService from '../../services/token.service.js'
 import * as JWTService from '../../services/jwt.service.js'
-// import jwt from 'jsonwebtoken'
 import { userFieldValidation } from '../../helpers/userValidation.js'
 //import Cookies from 'universal-cookie'
 //import cookieParser from "cookie-parser"
@@ -19,10 +18,8 @@ function login(req, res) {
 
         UsersService.login(user)
         .then(function(user){
-            // const token = jwt.sign({ id: user._id, email: user.email }, 'SECRETKEY')
             const token = JWTService.createJWTToken(user)
             TokenService.addToDB({ token, user_id: user._id })
-            //console.log('cookies')
             //res.cookie('crewdule-Auth', token)
             res.status(200).json({ ...user, token: token })
         })
@@ -83,7 +80,6 @@ function findUsers(req, res) {
     }
 
     try {
-        // const payload = jwt.verify(token, 'SECRETKEY')
         const payload = JWTService.verifyJWTToken(token)
         console.log(payload)
     }
@@ -184,7 +180,6 @@ function updatePassword(req, res){
         const password = req.body.password
         UsersService.findByEmail(email)
         .then(function(user){
-            console.log(user)
             UsersService.update(user._id, {'password': password})
             .then(function(){
                 res.status(200).json({ message: 'Password updated' })

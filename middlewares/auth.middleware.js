@@ -3,8 +3,6 @@ import * as TokenService from '../services/token.service.js'
 import jwt from 'jsonwebtoken'
 
 function hasToken(req, res, next) {
-    console.log('se ejecuto')
-
     const token = req.headers['auth-token']
 
     if (!token) {

@@ -35,14 +35,6 @@ async function sendPasswordRecoveryEmail(email, otp){
 
     const emailSent = await transporter.sendMail(mail_configs) 
     return emailSent
-    // function (error, info) {
-    //     if (error) {
-    //         console.log(error);
-    //         throw new Error('An error has occured')
-    //     }
-    //     return resolve({ message: "Email sent succesfuly" })
-    // });
-
 }
 
 export {

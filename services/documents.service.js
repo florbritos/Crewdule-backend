@@ -41,19 +41,6 @@ async function saveNewDocument(document){
 async function updateDocument(id, document){
 
     const docToUpdate = {...document}
-
-    // await client.connect()
-
-    // const result = await usersCollection.updateOne({
-    //     _id: new ObjectId(id)
-    // }, {
-    //     $set: docToUpdate
-    // })
-
-    // if (result.modifiedCount === 0) {
-    //     throw new Error("The document doesn't exists")
-    // }
-
     return client.connect()
     .then(function(){
         return documentsCollection.updateOne({
@@ -72,11 +59,6 @@ async function deleteDocument(id){
     if (result.deletedCount === 0) {
         throw new Error("The document doesn't exists")
     }
-
-    // return client.connect()
-    // .then(function(){
-    //     return documentsCollection.deleteOne({ _id: ObjectId(id) })
-    // })
 }
 
 export {

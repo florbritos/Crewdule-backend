@@ -5,8 +5,6 @@ import DocumentsRoutes from './api/routers/documents.api.routes.js'
 import cors from 'cors'
 import cookieParser from "cookie-parser";
 
-process.env.TZ = 'America/Argentina/Buenos_Aires'
-
 const app = express()
 app.use(cookieParser())
 app.use(cors())
