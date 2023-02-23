@@ -4,6 +4,8 @@ import CalendarRoutes from './routers/calendar.api.routes.js'
 import UsersRoutes from './routers/users.api.routes.js'
 import DocumentsRoutes from './routers/documents.api.routes.js'
 
+process.env.TZ = 'America/Argentina/Buenos_Aires'
+
 const app = express()
 app.use(cors())
 app.use(express.json())
