@@ -27,7 +27,7 @@ function validationRules(key, eventInfo, errorMessage){
                     new Date(eventInfo[key]).getMonth() == new Date(eventInfo.end).getMonth() &&
                     new Date(eventInfo[key]).getDate() + 1 !== new Date(eventInfo.end).getDate()
                 ){
-                    errorMessage = "The Ending time should be set to one day ahead of Starting Time only." + (new Date(eventInfo[key])).toString()
+                    errorMessage = "The Ending time should be set to one day ahead of Starting Time only." + (new Date(eventInfo[key])).toString() + '--' + (new Date(eventInfo.end)).toString()
                 }
             }
             break;
