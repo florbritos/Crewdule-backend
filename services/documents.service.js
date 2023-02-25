@@ -1,9 +1,10 @@
 import { MongoClient, ObjectId} from 'mongodb'
+import { client, DBCREWDULE } from '../constants.js'
 
 //const client = new MongoClient('mongodb://127.0.0.1:27017')
-const client = new MongoClient('mongodb+srv://crewdule:35978540Fb@cluster0.ptdeusi.mongodb.net/test')
-const documentsCollection = client.db('DB_CREWDULE').collection('Documents')
-
+//const client = new MongoClient('mongodb+srv://crewdule:35978540Fb@cluster0.ptdeusi.mongodb.net/test')
+//const documentsCollection = client.db('DB_CREWDULE').collection('Documents')
+const documentsCollection = DBCREWDULE.collection('Documents')
 
 async function getAllDocuments(filter = {}){
 

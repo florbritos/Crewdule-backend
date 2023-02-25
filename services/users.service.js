@@ -1,9 +1,11 @@
 import { MongoClient, ObjectId } from 'mongodb'
+import { client, DBCREWDULE } from '../constants.js'
 import * as PasswordService from './password.service.js'
 
 //const client = new MongoClient('mongodb://127.0.0.1:27017')
-const client = new MongoClient('mongodb+srv://crewdule:35978540Fb@cluster0.ptdeusi.mongodb.net/test')
-const usersCollection = client.db('DB_CREWDULE').collection('Users')
+//const client = new MongoClient('mongodb+srv://crewdule:35978540Fb@cluster0.ptdeusi.mongodb.net/test')
+//const usersCollection = client.db('DB_CREWDULE').collection('Users')
+const usersCollection = DBCREWDULE.collection('Users')
 
 async function login({ email, password }) {
 

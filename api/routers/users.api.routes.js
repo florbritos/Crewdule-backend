@@ -7,6 +7,7 @@ const route = express.Router()
 route.route('/api/account/session')
     .post(UsersApiController.login)
     .delete(UsersApiController.logout)
+    .get(UsersApiController.checkSession)
 
 route.route('/api/users')
     .get(UsersApiController.findUsers)

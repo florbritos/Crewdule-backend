@@ -1,8 +1,9 @@
-import { MongoClient, ObjectId} from 'mongodb'
+import { ObjectId} from 'mongodb'
+import { client, DBCREWDULE } from '../constants.js'
 
 //const client = new MongoClient('mongodb://127.0.0.1:27017')
-const client = new MongoClient('mongodb+srv://crewdule:35978540Fb@cluster0.ptdeusi.mongodb.net/test')
-const calendarCollection = client.db('DB_CREWDULE').collection('Calendar')
+// const client = new MongoClient('mongodb+srv://crewdule:35978540Fb@cluster0.ptdeusi.mongodb.net/test')
+const calendarCollection = DBCREWDULE.collection('Calendar')
 
 async function getAllEvents(filter = {}){
 
