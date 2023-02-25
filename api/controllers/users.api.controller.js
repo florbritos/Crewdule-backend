@@ -19,7 +19,7 @@ function login(req, res) {
             const token = JWTService.createJWTToken(user)
             TokenService.addToDB({ token, user_id: user._id })
             console.log('entro2')
-            res.cookie('Crewdule-Auth', token, {httpOnly: true, secure: true})
+            res.cookie('Crewdule-Auth', token, {httpOnly: true, secure: true, domain: "https://crewdule.vercel.app"})
             console.log('entro3')
             res.status(200).json(user)
         })
@@ -200,17 +200,7 @@ function updatePassword(req, res){
 
 function checkSession(req,res){
 
-    //res.cookie('Test', 'hola', {httpOnly: true, secure: true})
     const token = req.cookies['Crewdule-Auth']
-
-    // try{
-    //     const token = req.cookies['Crewdule-Auth']
-    //     res.status(200).json({ message: 'Token found in cookies. Session opened' })
-    // }
-    // catch{
-    //     return res.status(401).json({ message: 'No token in cookies. No session opened' })
-    // }
-        
 
     if (!token) {
         return res.status(401).json({ message: 'No token in cookies. No session opened' })
