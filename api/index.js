@@ -7,7 +7,7 @@ import DocumentsRoutes from './routers/documents.api.routes.js'
 process.env.TZ = 'America/Argentina/Buenos_Aires'
 
 const app = express()
-app.use(cors())
+app.use(cors({origin: 'https://crewdule.vercel.app', credentials: true}))
 app.use(express.json())
 
 app.use('/', CalendarRoutes)
