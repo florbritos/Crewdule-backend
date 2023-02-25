@@ -199,23 +199,24 @@ function updatePassword(req, res){
 }
 
 function checkSession(req,res){
-    
-    res.cookie('Test', 'hola', {httpOnly: true, secure: true})
 
-    try{
-        const token = req.cookies['Crewdule-Auth']
-        res.status(200).json({ message: 'Token found in cookies. Session opened' })
-    }
-    catch{
-        return res.status(401).json({ message: 'No token in cookies. No session opened' })
-    }
-        
+    //res.cookie('Test', 'hola', {httpOnly: true, secure: true})
+    const token = req.cookies['Crewdule-Auth']
 
-    // if (!token) {
+    // try{
+    //     const token = req.cookies['Crewdule-Auth']
+    //     res.status(200).json({ message: 'Token found in cookies. Session opened' })
+    // }
+    // catch{
     //     return res.status(401).json({ message: 'No token in cookies. No session opened' })
     // }
+        
 
-    // res.status(200).json({ message: 'Token found in cookies. Session opened' })
+    if (!token) {
+        return res.status(401).json({ message: 'No token in cookies. No session opened' })
+    }
+
+    res.status(200).json({ message: 'Token found in cookies. Session opened' })
 }
 
 export {
