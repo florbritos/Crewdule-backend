@@ -13,12 +13,14 @@ function login(req, res) {
             email: req.body.loginEmail.toLowerCase(),
             password: req.body.loginPassword
         }
-
+        console.log('entro1', user)
         UsersService.login(user)
         .then(function(user){
             const token = JWTService.createJWTToken(user)
             TokenService.addToDB({ token, user_id: user._id })
+            console.log('entro2')
             res.cookie('Crewdule-Auth', token, {httpOnly: true, secure: true})
+            console.log('entro3')
             res.status(200).json(user)
         })
         .catch(function(err){
