@@ -19,7 +19,7 @@ function login(req, res) {
             const token = JWTService.createJWTToken(user)
             TokenService.addToDB({ token, user_id: user._id })
             console.log('entro2')
-            res.cookie('Crewdule-Auth', token, {httpOnly: true, secure: true, domain: "https://crewdule.vercel.app"})
+            res.cookie('Crewdule-Auth', token, {httpOnly: true, secure: true, domain: "https://crewdule-backend.vercel.app"})
             console.log('entro3')
             res.status(200).json(user)
         })
