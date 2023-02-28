@@ -3,8 +3,8 @@ import * as TokenService from '../services/token.service.js'
 import jwt from 'jsonwebtoken'
 
 function hasToken(req, res, next) {
-    //const token = req.headers['auth-token']
-    const token = req.cookies['Crewdule-Auth']
+    const token = req.headers['auth-token']
+    //const token = req.cookies['Crewdule-Auth']
 
     if (!token) {
         return res.status(401).json({ message: 'No token was sent' })

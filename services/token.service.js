@@ -11,9 +11,10 @@ async function addToDB(token) {
     await tokenCollection.insertOne(token)
 }
 
-async function removeByToken(token) {
+async function removeByToken(tokenToDelete) {
+    console.log(tokenToDelete)
     await client.connect()
-    const result = await tokenCollection.deleteOne({ token })
+    const result = await tokenCollection.deleteOne(tokenToDelete)
     if (result.deletedCount === 0) {
         throw new Error("The token doesn't exists")
     }

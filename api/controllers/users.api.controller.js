@@ -13,15 +13,15 @@ function login(req, res) {
             email: req.body.loginEmail.toLowerCase(),
             password: req.body.loginPassword
         }
-        console.log('entro1', user)
+        //console.log('entro1', user)
         UsersService.login(user)
         .then(function(user){
             const token = JWTService.createJWTToken(user)
             TokenService.addToDB({ token, user_id: user._id })
-            console.log('entro2')
-            res.cookie('Crewdule-Auth', token, {domain: "example.com", httpOnly: true, secure: true})
-            console.log('entro3')
-            res.status(200).json(user)
+            //console.log('entro2')
+            //res.cookie('Crewdule-Auth', token, {domain: "example.com", httpOnly: true, secure: true})
+            //console.log('entro3')
+            res.status(200).json({...user, token: token})
         })
         .catch(function(err){
             res.status(500).json({ message: err.message })
@@ -41,28 +41,31 @@ function logout(req, res) {
     } else {
         error.id = "User id must be set"
     }
-    const token = req.cookies['Crewdule-Auth']
-    if(token){
-        userToLogOut.token = token
-    } else {
-        error.token = "Token must be set"
-    }
-    // if(req.body.token){
-    //     userToLogOut.token = req.body.token
+    // const token = req.cookies['Crewdule-Auth']
+    // if(token){
+    //     userToLogOut.token = token
     // } else {
     //     error.token = "Token must be set"
     // }
-    
+    if(req.body.token){
+        userToLogOut.token = req.body.token
+    } else {
+        error.token = "Token must be set"
+    }
+    console.log(req.body.token)
+    console.log(userToLogOut.token)
     if(Object.entries(error).length === 0){
         UsersService.findById(userToLogOut.id)
         .then(function(user){
             if(user){
                 TokenService.removeByToken(userToLogOut.token)
                 .then(function(response){
-                    res.clearCookie('Crewdule-Auth');
+                    //res.clearCookie('Crewdule-Auth');
+                    console.log('res', response)
                     res.status(200).json({message: 'User was successfully logged out'})
                 })
                 .catch(function(err){
+                    console.log(err)
                     res.status(500).json({ message: err.message })
                 })
             } else {
@@ -79,8 +82,8 @@ function logout(req, res) {
 
 function findUsers(req, res) {
     const filter = {}
-    //const token = req.headers['auth-token']
-    const token = req.cookies['Crewdule-Auth']
+    const token = req.headers['auth-token']
+    //const token = req.cookies['Crewdule-Auth']
 
     if (!token) {
         return res.status(401).json({ message: 'No token was sent' })
@@ -200,13 +203,13 @@ function updatePassword(req, res){
 
 function checkSession(req,res){
 
-    const token = req.cookies['Crewdule-Auth']
+    // const token = req.cookies['Crewdule-Auth']
 
-    if (!token) {
-        return res.status(401).json({ message: 'No token in cookies. No session opened' })
-    }
+    // if (!token) {
+    //     return res.status(401).json({ message: 'No token in cookies. No session opened' })
+    // }
 
-    res.status(200).json({ message: 'Token found in cookies. Session opened' })
+    // res.status(200).json({ message: 'Token found in cookies. Session opened' })
 }
 
 export {
